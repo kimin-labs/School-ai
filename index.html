@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIE AI Tutor - Tanzanian Educational AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/assets/svg/1f1f9-1f1ff.svg">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="logo">
+                    <span class="logo-icon">🇹🇿</span>
+                    <span class="logo-text">TIE AI Tutor</span>
+                </div>
+                <div class="tagline">Official Tanzanian Curriculum Assistant</div>
+            </div>
+            <div class="nav-controls">
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                    <span class="theme-text">Dark Mode</span>
+                </button>
+                <div class="user-info">
+                    <span class="user-role">Student</span>
+                    <button class="btn-logout" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-book-open"></i> TIE Subjects</h3>
+                <button class="btn-new-chat" id="newChatBtn">
+                    <i class="fas fa-plus"></i> New Chat
+                </button>
+            </div>
+            
+            <div class="subject-list">
+                <div class="subject-item active" data-subject="all">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>All Subjects</span>
+                </div>
+                <div class="subject-item" data-subject="physics">
+                    <i class="fas fa-atom"></i>
+                    <span>Physics</span>
+                </div>
+                <div class="subject-item" data-subject="chemistry">
+                    <i class="fas fa-flask"></i>
+                    <span>Chemistry</span>
+                </div>
+                <div class="subject-item" data-subject="biology">
+                    <i class="fas fa-dna"></i>
+                    <span>Biology</span>
+                </div>
+                <div class="subject-item" data-subject="mathematics">
+                    <i class="fas fa-calculator"></i>
+                    <span>Mathematics</span>
+                </div>
+                <div class="subject-item" data-subject="kiswahili">
+                    <i class="fas fa-language"></i>
+                    <span>Kiswahili</span>
+                </div>
+                <div class="subject-item" data-subject="english">
+                    <i class="fas fa-globe"></i>
+                    <span>English</span>
+                </div>
+                <div class="subject-item" data-subject="geography">
+                    <i class="fas fa-globe-africa"></i>
+                    <span>Geography</span>
+                </div>
+                <div class="subject-item" data-subject="history">
+                    <i class="fas fa-landmark"></i>
+                    <span>History</span>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <div class="status-indicator active"></div>
+                    <span>TIE System Active</span>
+                </div>
+                <div class="curriculum-info">
+                    <small>Tanzanian Institute of Education</small>
+                    <small>Form 1-6 Curriculum</small>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="main-content">
+            <!-- Welcome Screen -->
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="welcome-content">
+                    <div class="welcome-icon">🇹🇿</div>
+                    <h1>TIE AI Tutor</h1>
+                    <p class="welcome-subtitle">Official Tanzanian Educational AI Assistant</p>
+                    
+                    <div class="welcome-features">
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>100% TIE Syllabus Compliant</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-book"></i>
+                            <span>Official Textbooks Only</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>For Students & Teachers</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-language"></i>
+                            <span>Kiswahili & English</span>
+                        </div>
+                    </div>
+
+                    <div class="quick-questions">
+                        <h3>Try asking:</h3>
+                        <div class="question-chips">
+                            <button class="chip" data-question="Explain Newton's first law of motion">
+                                Newton's First Law
+                            </button>
+                            <button class="chip" data-question="What is photosynthesis?">
+                                Photosynthesis
+                            </button>
+                            <button class="chip" data-question="Define chemical bonding">
+                                Chemical Bonding
+                            </button>
+                            <button class="chip" data-question="Elezea kanuni ya kwanza ya Newton">
+                                Kanuni ya Newton (Kiswahili)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Container -->
+            <div class="chat-container" id="chatContainer" style="display: none;">
+                <div class="chat-header">
+                    <div class="current-subject">
+                        <i class="fas fa-atom"></i>
+                        <span>Physics - Form 2</span>
+                    </div>
+                    <div class="chat-info">
+                        <span class="message-count">0 Messages</span>
+                        <button class="btn-clear" id="clearChatBtn">
+                            <i class="fas fa-trash"></i> Clear Chat
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Messages Area -->
+                <div class="messages" id="messages">
+                    <!-- Messages will be inserted here -->
+                </div>
+
+                <!-- Typing Indicator -->
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-dots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <span>TIE AI is thinking...</span>
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-area">
+                    <div class="input-container">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Ask any question according to Tanzanian curriculum... (Press Shift+Enter for new line)"
+                            rows="1"
+                            autocomplete="off"
+                        ></textarea>
+                        <div class="input-controls">
+                            <button class="btn-attach" title="Attach book reference">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                            <button class="btn-send" id="sendBtn">
+                                <i class="fas fa-paper-plane"></i>
+                                <span class="send-text">Send</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="input-footer">
+                        <div class="language-toggle">
+                            <span class="lang-option active" data-lang="en">English</span>
+                            <span class="lang-separator">|</span>
+                            <span class="lang-option" data-lang="sw">Kiswahili</span>
+                        </div>
+                        <div class="disclaimer">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Answers sourced only from TIE approved books</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Source Modal -->
+    <div class="modal" id="sourceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Source Information</h3>
+                <button class="modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="source-details">
+                    <div class="source-item">
+                        <strong>Book:</strong>
+                        <span id="sourceBook">Physics for Secondary Schools Form 2</span>
+                    </div>
+                    <div class="source-item">
+                        <strong>Subject:</strong>
+                        <span id="sourceSubject">Physics</span>
+                    </div>
+                    <div class="source-item">
+                        <strong>Topic:</strong>
+                        <span id="sourceTopic">Force and Motion</span>
+                    </div>
+                    <div class="source-item">
+                        <strong>Page:</strong>
+                        <span id="sourcePage">45-48</span>
+                    </div>
+                    <div class="source-item">
+                        <strong>Form:</strong>
+                        <span id="sourceForm">Form 2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content login-modal">
+            <div class="login-header">
+                <div class="login-logo">🇹🇿</div>
+                <h2>Welcome to TIE AI Tutor</h2>
+                <p>Enter your credentials to access the Tanzanian curriculum</p>
+            </div>
+            <div class="login-body">
+                <div class="form-group">
+                    <label for="userType">I am a:</label>
+                    <select id="userType" class="form-select">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="userForm">Form/Class:</label>
+                    <select id="userForm" class="form-select">
+                        <option value="form1">Form 1</option>
+                        <option value="form2">Form 2</option>
+                        <option value="form3">Form 3</option>
+                        <option value="form4">Form 4</option>
+                        <option value="form5">Form 5</option>
+                        <option value="form6">Form 6</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username (Optional):</label>
+                    <input type="text" id="username" class="form-input" placeholder="Enter your name">
+                </div>
+                <button class="btn-login" id="loginSubmitBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Enter TIE AI Tutor
+                </button>
+                <div class="login-note">
+                    <i class="fas fa-lock"></i>
+                    <span>No password required. This is an educational tool.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TIE AI Tutor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .login-fullscreen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .login-box {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, #1a56db 0%, #046c4e 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .login-logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .login-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .login-body {
+            padding: 40px 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #1a56db;
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #1a56db 0%, #046c4e 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(26, 86, 219, 0.2);
+        }
+        
+        .login-footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .login-footer a {
+            color: #1a56db;
+            text-decoration: none;
+        }
+        
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .lang-btn {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn.active {
+            background: white;
+            color: #1a56db;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-fullscreen">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="login-logo">🇹🇿</div>
+                <h1>TIE AI Tutor</h1>
+                <p>Official Tanzanian Curriculum Assistant</p>
+                <div class="language-selector">
+                    <button class="lang-btn active" onclick="setLanguage('en')">English</button>
+                    <button class="lang-btn" onclick="setLanguage('sw')">Kiswahili</button>
+                </div>
+            </div>
+            
+            <div class="login-body">
+                <div class="form-group">
+                    <label for="userRole">I am a:</label>
+                    <select id="userRole" class="form-control">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userClass">Form/Class:</label>
+                    <select id="userClass" class="form-control">
+                        <option value="form1">Form 1</option>
+                        <option value="form2">Form 2</option>
+                        <option value="form3">Form 3</option>
+                        <option value="form4">Form 4</option>
+                        <option value="form5">Form 5</option>
+                        <option value="form6">Form 6</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userName">Your Name (Optional):</label>
+                    <input type="text" id="userName" class="form-control" placeholder="Enter your name">
+                </div>
+                
+                <button class="btn-login" onclick="login()">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Enter TIE AI Tutor
+                </button>
+                
+                <div class="login-footer">
+                    <p><i class="fas fa-lock"></i> No password required. Secure educational access.</p>
+                    <p>By proceeding, you agree to use only for Tanzanian curriculum learning.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentLanguage = 'en';
+        
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.includes(lang === 'en' ? 'English' : 'Kiswahili'));
+            });
+            
+            // Update text based on language
+            if (lang === 'sw') {
+                document.querySelector('h1').textContent = 'TIE AI Kiongozi';
+                document.querySelector('.login-header p').textContent = 'Msaidizi Rasmi ya Mtaala wa Tanzania';
+                document.querySelector('label[for="userRole"]').textContent = 'Mimi ni:';
+                document.querySelector('label[for="userClass"]').textContent = 'Kidato/Darasa:';
+                document.querySelector('label[for="userName"]').textContent = 'Jina Lako (Hiari):';
+                document.getElementById('userName').placeholder = 'Weka jina lako';
+                document.querySelector('.btn-login').innerHTML = '<i class="fas fa-sign-in-alt"></i>Ingia TIE AI Tutor';
+                document.querySelector('.login-footer p:nth-child(1)').innerHTML = '<i class="fas fa-lock"></i> Hakuna nenosiri inahitajika. Ufikiaji wa elimu salama.';
+                document.querySelector('.login-footer p:nth-child(2)').textContent = 'Kwa kuendelea, unakubali kutumia kwa kusoma tu mtaala wa Tanzania.';
+                
+                // Update options
+                const roleSelect = document.getElementById('userRole');
+                roleSelect.options[0].text = 'Mwanafunzi';
+                roleSelect.options[1].text = 'Mwalimu';
+            } else {
+                document.querySelector('h1').textContent = 'TIE AI Tutor';
+                document.querySelector('.login-header p').textContent = 'Official Tanzanian Curriculum Assistant';
+                document.querySelector('label[for="userRole"]').textContent = 'I am a:';
+                document.querySelector('label[for="userClass"]').textContent = 'Form/Class:';
+                document.querySelector('label[for="userName"]').textContent = 'Your Name (Optional):';
+                document.getElementById('userName').placeholder = 'Enter your name';
+                document.querySelector('.btn-login').innerHTML = '<i class="fas fa-sign-in-alt"></i>Enter TIE AI Tutor';
+                document.querySelector('.login-footer p:nth-child(1)').innerHTML = '<i class="fas fa-lock"></i> No password required. Secure educational access.';
+                document.querySelector('.login-footer p:nth-child(2)').textContent = 'By proceeding, you agree to use only for Tanzanian curriculum learning.';
+                
+                // Update options
+                const roleSelect = document.getElementById('userRole');
+                roleSelect.options[0].text = 'Student';
+                roleSelect.options[1].text = 'Teacher';
+            }
+        }
+        
+        function login() {
+            const userRole = document.getElementById('userRole').value;
+            const userClass = document.getElementById('userClass').value;
+            const userName = document.getElementById('userName').value || (userRole === 'student' ? 'Student' : 'Teacher');
+            
+            // Save to localStorage
+            localStorage.setItem('tieUserType', userRole);
+            localStorage.setItem('tieUserForm', userClass);
+            localStorage.setItem('tieUsername', userName);
+            localStorage.setItem('tieLanguage', currentLanguage);
+            
+            // Redirect to main page
+            window.location.href = 'index.html';
+        }
+        
+        // Auto-focus on name input
+        document.getElementById('userName').focus();
+    </script>
+</body>
+</html>
